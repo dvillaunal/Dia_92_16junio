@@ -1,45 +1,34 @@
-```{r, eval=FALSE, include=TRUE}
-"Protocolo:
- 
- 1. Daniel Felipe Villa Rengifo
- 
- 2. Lenguaje: R
- 
- 3. Tema: ANÁLISIS DISCRIMINANTE LINEAL Y CUADRÁTICO EN R [Parte 4]
- 
- 4. Fuentes:  
-    https://www.r-bloggers.com/2018/11/linear-quadratic-and-regularized-discriminant-analysis/"
-```
+## ---- eval=FALSE, include=TRUE-------------------------------------------------------
+## "Protocolo:
+## 
+##  1. Daniel Felipe Villa Rengifo
+## 
+##  2. Lenguaje: R
+## 
+##  3. Tema: ANÁLISIS DISCRIMINANTE LINEAL Y CUADRÁTICO EN R [Parte 4]
+## 
+##  4. Fuentes:
+##     https://www.r-bloggers.com/2018/11/linear-quadratic-and-regularized-discriminant-analysis/"
 
 
-```{r, eval=FALSE, include=TRUE}
-# Antes de trabajar si es necesario, leer las bases de datos, en mi caso no lo es, y aque con el .RData es suficiente:
+## ---- eval=FALSE, include=TRUE-------------------------------------------------------
+## # Antes de trabajar si es necesario, leer las bases de datos, en mi caso no lo es, y aque con el .RData es suficiente:
+## 
+## Auto <- read.csv(file = "Auto.csv")
+## Auto2 <- read.csv(file = "Auto2.csv")
+## Auto.test <- read.csv(file = "Auto_test.csv")
+## Auto.train <- read.csv(file = "Auto_train.csv")
 
-Auto <- read.csv(file = "Auto.csv")
-Auto2 <- read.csv(file = "Auto2.csv")
-Auto.test <- read.csv(file = "Auto_test.csv")
-Auto.train <- read.csv(file = "Auto_train.csv")
-```
 
-
-```{r}
+## ------------------------------------------------------------------------------------
 # Leer la base de datos que contiene todos los dataframe y modelos:
 #load(".RData")
 
 # Guardamos todas las salidas:
 sink("OUTPUTS.txt")
-```
 
 
-# Evaluación del modelo
-
-+ `predict()` -> Predicciones a partir de los resultados de diversas funciones de ajuste de modelos
-
-+ `table()` -> Tabla de contingencia de los conteos en cada combinación de niveles de factores
-
-## Modelo LDA:
-
-```{r}
+## ------------------------------------------------------------------------------------
 # Evaluación del modelo LDA con los datos de test
 lda.pred <-  predict(object = modelo.lda, newdata = Auto.test)
 
@@ -79,11 +68,9 @@ print(mean(lda.pred$class == Auto.test$mpg01))
 "El test error rate es muy bajo con este modelo (5%). En prácticamente el 95% de los casos las observaciones son correctamente predichas."
 
 "NOTA: Podríamos cambiar el threshold de decisión si las predicciones no fueran lo bastante buenas en el sentido que nos interesa."
-```
 
-# Modelo QDA:
 
-```{r}
+## ------------------------------------------------------------------------------------
 # Evaluación del modelo QDA con los datos de test
 print("# Evaluación del modelo QDA con los datos de test")
 qda.pred <-  predict(object = modelo.qda, newdata = Auto.test)
@@ -99,13 +86,9 @@ mean(qda.pred$class != Auto.test$mpg01)
 
 # Resultado:
 "El test error rate del modelo QDA es ligeramente superior (8,8%), por lo que en este caso optaríamos por el LDA, que cuenta con más porcentaje de aciertos globales."
-```
 
-# Paquete caret
 
-+ `confusionMatrix()` -> Calcula una tabulación cruzada de clases observadas y predichas con estadísticos asociados
-
-```{r}
+## ------------------------------------------------------------------------------------
 # Instalar el paquete:
 #install.packages("caret")
 library(caret)
@@ -113,17 +96,9 @@ library(caret)
 #tabulación cruzada de Auto.tests y predichas con modelo.lda.caret
 print("#tabulación cruzada de Auto.tests y predichas con modelo.lda.caret")
 confusionMatrix(as.factor(Auto.test$mpg01), predict(modelo.lda.caret, Auto.test))
-```
 
 
-# Visualización del modelo
-
-+ `partimat()` -> Proporciona una matriz de figuras múltiples que muestra la clasificación de las observaciones basadas en métodos de clasificación (por ejemplo, lda, qda) para cada combinación de dos variables.
-
-Además, se muestran los límites de clasificación y las tasas de error aparentes se dan en cada título
-
-
-```{r}
+## ------------------------------------------------------------------------------------
 # LDA respecto a los datos de entrenamiento usados en el modelo
 
 png(filename = "modelo_lda.png")
@@ -166,4 +141,3 @@ dev.off()
 "En base a las representaciones podemos observar que la función discriminante consigue separar mejor la clase 1, existiendo superposición respecto a la clase 0."
 
 sink()
-```

@@ -1,0 +1,62 @@
+[1] "# Observanos los nombres del anterior predicción:"
+[1] "class"     "posterior" "x"        
+[1] "La función predict() ha calculado las probabilidades a posteriori de que cada nueva observación pertenezca a la clase con menor rendimiento (mpg01 = 0)."
+[1] "calculamos el porcentaje de observaciones incorrectamente clasificadas comparando la predicción con la verdadera clase del set de datos de test, obteniendo así el test error rate del modelo discriminante:"
+[1] "# Matriz de confusion del modelo LDA"
+              Clase real
+Clase predicha  0  1
+             0 35  0
+             1  7 37
+[1] "# Aplicando un threshold del 50% a las probabilidades a posterior podemos recrear las predicciones del modelo."
+[1] 35
+[1] 44
+[1] "# Test error rate del modelo LDA"
+[1] 0.08860759
+[1] "# Porcentaje de aciertos del modelo LDA"
+[1] 0.9113924
+[1] "El test error rate es muy bajo con este modelo (5%). En prácticamente el 95% de los casos las observaciones son correctamente predichas."
+[1] "NOTA: Podríamos cambiar el threshold de decisión si las predicciones no fueran lo bastante buenas en el sentido que nos interesa."
+[1] "# Evaluación del modelo QDA con los datos de test"
+[1] "# Matriz de confusion del modelo QDA"
+              Clase real
+Clase predicha  0  1
+             0 37  2
+             1  5 35
+[1] "# Test error rate del modelo QDA"
+[1] 0.08860759
+[1] "El test error rate del modelo QDA es ligeramente superior (8,8%), por lo que en este caso optaríamos por el LDA, que cuenta con más porcentaje de aciertos globales."
+[1] "#tabulación cruzada de Auto.tests y predichas con modelo.lda.caret"
+Confusion Matrix and Statistics
+
+          Reference
+Prediction  0  1
+         0 35  7
+         1  0 37
+                                          
+               Accuracy : 0.9114          
+                 95% CI : (0.8259, 0.9636)
+    No Information Rate : 0.557           
+    P-Value [Acc > NIR] : 5.512e-12       
+                                          
+                  Kappa : 0.8241          
+                                          
+ Mcnemar's Test P-Value : 0.02334         
+                                          
+            Sensitivity : 1.0000          
+            Specificity : 0.8409          
+         Pos Pred Value : 0.8333          
+         Neg Pred Value : 1.0000          
+             Prevalence : 0.4430          
+         Detection Rate : 0.4430          
+   Detection Prevalence : 0.5316          
+      Balanced Accuracy : 0.9205          
+                                          
+       'Positive' Class : 0               
+                                          
+null device 
+          1 
+null device 
+          1 
+null device 
+          1 
+[1] "En base a las representaciones podemos observar que la función discriminante consigue separar mejor la clase 1, existiendo superposición respecto a la clase 0."
